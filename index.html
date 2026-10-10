@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1c120c">
+    <title>Silent Bid — Time One Irreversible Bid</title>
+    <meta name="description" content="Silent Bid is a free casual auction game for iPhone and iPad. Study conflicting clues, watch the estate price rise, and place one irreversible bid inside the winning range.">
+    <style>
+        :root {
+            --wood: #1c120c;
+            --wood-2: #2a1a12;
+            --panel: #3a261b;
+            --ivory: #f6efe3;
+            --ivory-2: #efe2cf;
+            --ink: #1a120c;
+            --gold: #c6a15b;
+            --gold-soft: #e8d7b0;
+            --wine: #8f3040;
+            --parchment: #d9cbb8;
+            --line: rgba(198, 161, 91, 0.38);
+            --shadow: 0 28px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            color: var(--ivory);
+            background: var(--wood);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse 70% 45% at 100% 0%, rgba(143, 48, 64, 0.28), transparent 55%),
+                radial-gradient(ellipse 50% 40% at 0% 100%, rgba(198, 161, 91, 0.12), transparent 50%),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.015) 0 1px,
+                    transparent 1px 14px
+                );
+        }
+
+        a { color: inherit; }
+
+        a:focus-visible, .btn:focus-visible {
+            outline: 2px solid var(--gold-soft);
+            outline-offset: 3px;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 22px 80px;
+        }
+
+        .mast {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding-bottom: 18px;
+            margin-bottom: 36px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .seal {
+            width: 52px;
+            height: 52px;
+            flex: none;
+        }
+
+        .brand strong {
+            display: block;
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 3px;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .mast nav {
+            display: flex;
+            gap: 22px;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .mast nav a { text-decoration: none; color: var(--parchment); }
+        .mast nav a:hover { color: var(--gold-soft); }
+
+        .stage {
+            display: grid;
+            grid-template-columns: 1.08fr 0.92fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .kicker {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: clamp(2.6rem, 6vw, 4.6rem);
+            line-height: 0.92;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+        }
+
+        h1 em {
+            display: block;
+            margin-top: 0.12em;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--gold-soft);
+        }
+
+        .lede {
+            color: var(--parchment);
+            font-size: 1.12rem;
+            line-height: 1.65;
+            max-width: 38rem;
+            margin-bottom: 18px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 26px;
+        }
+
+        .tags span {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            border: 1px solid var(--line);
+            padding: 6px 12px;
+            color: var(--gold-soft);
+        }
+
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            padding: 14px 18px;
+            transition: transform 0.16s ease;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+
+        .btn-gold {
+            background: linear-gradient(180deg, #e8d7b0, var(--gold));
+            color: var(--ink);
+        }
+
+        .btn-line {
+            border: 1px solid var(--gold);
+            color: var(--gold-soft);
+            background: transparent;
+        }
+
+        .lot-card {
+            background: var(--ivory);
+            color: var(--ink);
+            padding: 22px 22px 18px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .lot-card::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(143, 48, 64, 0.35);
+            pointer-events: none;
+        }
+
+        .lot-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--wine);
+            margin-bottom: 12px;
+        }
+
+        .lot-card h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 6px;
+        }
+
+        .lot-card .quiet {
+            color: #5c4b3a;
+            font-size: 0.98rem;
+            margin-bottom: 16px;
+        }
+
+        .meter {
+            height: 10px;
+            background: #e4d5c0;
+            position: relative;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .meter i {
+            display: block;
+            height: 100%;
+            width: 100%;
+            transform-origin: left center;
+            background: linear-gradient(90deg, #8f3040, #c6a15b);
+            animation: climb 3.2s ease-in-out infinite;
+        }
+
+        .window {
+            position: absolute;
+            left: 42%;
+            width: 28%;
+            top: -3px;
+            bottom: -3px;
+            border: 2px solid var(--ink);
+            background: rgba(246, 239, 227, 0.25);
+        }
+
+        .meter-key {
+            display: flex;
+            justify-content: space-between;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6b5846;
+            margin-bottom: 16px;
+        }
+
+        .bid-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            border-top: 1px solid rgba(26, 18, 12, 0.12);
+            padding-top: 14px;
+        }
+
+        .bid-row p { font-size: 0.92rem; line-height: 1.45; color: #3d2e22; }
+
+        .paddle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--wine);
+            color: var(--ivory);
+            display: grid;
+            place-items: center;
+            text-align: center;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            font-size: 0.78rem;
+            box-shadow: 0 8px 0 #5e1d28;
+        }
+
+        @keyframes climb {
+            0% { transform: scaleX(0.18); }
+            55% { transform: scaleX(0.62); }
+            100% { transform: scaleX(0.18); }
+        }
+
+        .conditions {
+            margin-top: 56px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .conditions article {
+            background: var(--wood-2);
+            border-top: 3px solid var(--gold);
+            padding: 22px 18px 24px;
+        }
+
+        .conditions article:nth-child(2) { border-top-color: var(--ivory); }
+        .conditions article:nth-child(3) { border-top-color: var(--wine); }
+
+        .conditions span {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .conditions h2 {
+            font-size: 1.45rem;
+            margin: 8px 0 8px;
+            font-weight: 700;
+        }
+
+        .conditions p { color: var(--parchment); line-height: 1.55; font-size: 1rem; }
+
+        .salon { margin-top: 64px; }
+
+        .salon h2, .house h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+        }
+
+        .salon .intro, .house .intro {
+            max-width: 40rem;
+            margin-top: 12px;
+            color: var(--parchment);
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        .bands {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 14px;
+        }
+
+        .bands ol {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .bands li {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 14px;
+            background: rgba(42, 26, 18, 0.85);
+            padding: 16px;
+            border-left: 2px solid var(--gold);
+        }
+
+        .bands b {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+        }
+
+        .bands h3 { font-size: 1.15rem; margin: 2px 0 4px; }
+        .bands p { color: var(--parchment); line-height: 1.5; font-size: 0.96rem; }
+
+        .stars {
+            background: var(--ivory);
+            color: var(--ink);
+            padding: 22px;
+        }
+
+        .stars h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .stars p { color: #4e3d2e; line-height: 1.55; }
+
+        .star-row {
+            display: flex;
+            gap: 8px;
+            margin: 16px 0 8px;
+            font-size: 1.4rem;
+            color: var(--wine);
+            letter-spacing: 0.15em;
+        }
+
+        .house { margin-top: 64px; }
+
+        .split {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 14px;
+        }
+
+        .sheet, .plate {
+            padding: 22px;
+        }
+
+        .sheet {
+            background: var(--ivory);
+            color: var(--ink);
+        }
+
+        .sheet h3, .plate h3 {
+            font-size: 1.55rem;
+            margin-bottom: 8px;
+        }
+
+        .sheet p { color: #4e3d2e; line-height: 1.6; }
+        .plate p { color: var(--parchment); line-height: 1.6; }
+
+        .sheet ul {
+            list-style: none;
+            margin-top: 14px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .sheet li {
+            background: var(--ivory-2);
+            padding: 12px 14px;
+            line-height: 1.5;
+        }
+
+        .sheet li strong { display: block; }
+
+        .plate {
+            background: var(--panel);
+            border: 1px solid var(--line);
+        }
+
+        .plate dl {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .plate div {
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 8px;
+        }
+
+        .plate dt {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 3px;
+        }
+
+        .plate dd { font-weight: 700; }
+
+        .close-bid {
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            padding: 22px;
+            background:
+                linear-gradient(100deg, rgba(143, 48, 64, 0.55), rgba(42, 26, 18, 0.2)),
+                var(--wood-2);
+            border: 1px solid var(--line);
+        }
+
+        .close-bid p { max-width: 40rem; color: var(--parchment); line-height: 1.6; }
+
+        footer {
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.82rem;
+            color: var(--parchment);
+        }
+
+        footer a { color: var(--gold-soft); font-weight: 700; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 860px) {
+            .stage, .conditions, .bands, .split { grid-template-columns: 1fr; }
+            .mast { align-items: flex-start; flex-wrap: wrap; }
+            .mast nav { width: 100%; flex-wrap: wrap; }
+            .actions { flex-direction: column; align-items: stretch; }
+            .actions .btn, .close-bid .btn { width: 100%; }
+            .bid-row { grid-template-columns: 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .meter i { animation: none; transform: scaleX(0.62); }
+            .btn:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="mast">
+            <a class="brand" href="index.html">
+                <svg class="seal" viewBox="0 0 52 52" aria-hidden="true">
+                    <circle cx="26" cy="26" r="24" fill="#8f3040"/>
+                    <circle cx="26" cy="26" r="20" fill="none" stroke="#e8d7b0" stroke-width="1.2"/>
+                    <text x="26" y="31" text-anchor="middle" fill="#f6efe3" font-family="Georgia, serif" font-size="16" font-weight="700">SB</text>
+                </svg>
+                <span>
+                    <strong>Silent Bid</strong>
+                    <small>Private estate auction</small>
+                </span>
+            </a>
+            <nav>
+                <a href="#how">How to play</a>
+                <a href="#lots">The lots</a>
+                <a href="privacy.html">Privacy</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="stage">
+                <div>
+                    <p class="kicker">Casual · Free · Designed for iPad</p>
+                    <h1>Read the room.<em>Bid once.</em></h1>
+                    <p class="lede">
+                        Silent Bid is a fast auction for iPhone and iPad. Each level sets out one estate item, a price that keeps climbing, and clues that hint at the winning range. Study the evidence, then place a single irreversible bid while the live price sits inside that range. Too early or too late, and the lot is lost. A well-timed bid can earn up to three stars.
+                    </p>
+                    <div class="tags">
+                        <span>10 handcrafted levels</span>
+                        <span>Conflicting clues</span>
+                        <span>One irreversible bid</span>
+                        <span>Up to 3 stars</span>
+                        <span>Age 4+</span>
+                        <span>Contains advertising</span>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-gold" href="https://apps.apple.com/us/app/silentbid/id6817257547?uo=4" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+                        <a class="btn btn-line" href="privacy.html">Privacy notice</a>
+                    </div>
+                </div>
+                <aside class="lot-card" aria-label="Sample auction card">
+                    <div class="lot-top">
+                        <span>Catalogue</span>
+                        <span>Price rising</span>
+                    </div>
+                    <h2>One estate lot.</h2>
+                    <p class="quiet">Indicators suggest a winning band. The hammer price moves through it only once.</p>
+                    <div class="meter" role="img" aria-label="A rising price bar crossing a marked bid window">
+                        <i></i>
+                        <span class="window"></span>
+                    </div>
+                    <div class="meter-key">
+                        <span>Opening</span>
+                        <span>Bid window</span>
+                        <span>Passed</span>
+                    </div>
+                    <div class="bid-row">
+                        <p>The bid cannot be revised. Wait for the displayed range, then commit.</p>
+                        <div class="paddle" aria-hidden="true">BID</div>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="conditions" id="how" aria-label="How a round works">
+                <article>
+                    <span>01 · Observe</span>
+                    <h2>Weigh the clues</h2>
+                    <p>Every level offers authored indicators for the winning bid range. Later auctions mix conflicting signals and misleading evidence, so the first reading is rarely the whole story.</p>
+                </article>
+                <article>
+                    <span>02 · Time</span>
+                    <h2>Follow the price</h2>
+                    <p>The auction price rises on its own. Your job is judgment: recognize when the number on screen is still inside the range the clues support.</p>
+                </article>
+                <article>
+                    <span>03 · Commit</span>
+                    <h2>Place the bid</h2>
+                    <p>Tap BID once. Early and late both fail the lot. A bid struck inside the displayed range can return as many as three stars.</p>
+                </article>
+            </section>
+
+            <section class="salon" id="lots">
+                <h2>Ten lots. Faster hammers.</h2>
+                <p class="intro">Silent Bid is built as a short private-estate sale: ten handcrafted levels, each one an item, a climbing price, and a narrower margin for a correct bid.</p>
+                <div class="bands">
+                    <ol>
+                        <li>
+                            <b>Opening</b>
+                            <div>
+                                <h3>Learn the room</h3>
+                                <p>Early levels teach you to match clues to a range and to wait for the price instead of bidding on instinct.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <b>Middle</b>
+                            <div>
+                                <h3>Conflicting evidence</h3>
+                                <p>Indicators start to disagree. Misleading details pull the estimate wide, and the useful range gets harder to trust.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <b>Final</b>
+                            <div>
+                                <h3>Quicker sales</h3>
+                                <p>The last lots keep the same irreversible bid, then shorten the time you have to read the room and strike.</p>
+                            </div>
+                        </li>
+                    </ol>
+                    <aside class="stars">
+                        <h3>Stars, not a second chance</h3>
+                        <div class="star-row" aria-hidden="true">★ ★ ★</div>
+                        <p>A clean, well-timed bid is worth up to three stars. There is no revision after you commit: the price either sat inside the displayed range, or it did not. Observation, timing, and judgment decide the lot.</p>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="house" id="devices">
+                <h2>A quiet sale, on your device.</h2>
+                <p class="intro">The App Store lists Silent Bid as a free English casual game, designed for iPad, rated 4+, and marked as containing advertising.</p>
+                <div class="split">
+                    <article class="sheet">
+                        <h3>What the sale asks of you</h3>
+                        <p>No account is described on the store listing. You read the lot, watch the price, and bid.</p>
+                        <ul>
+                            <li>
+                                <strong>Irreversible BID</strong>
+                                One commitment per rising price. Miss the range and the lot fails.
+                            </li>
+                            <li>
+                                <strong>Clues with a catch</strong>
+                                Indicators estimate the winning range, then grow more contradictory.
+                            </li>
+                            <li>
+                                <strong>Three-star ceiling</strong>
+                                Precision is the score. The best bids earn the full three stars.
+                            </li>
+                            <li>
+                                <strong>Free, with ads</strong>
+                                The listing states the game contains advertising. Details are on the privacy notice.
+                            </li>
+                        </ul>
+                    </article>
+                    <article class="plate">
+                        <h3>On the App Store</h3>
+                        <p>Designed for iPad. Requires iOS 15 or later. The Mac build requires Apple silicon and macOS 12 or later, and is marked not verified for macOS. Apple Vision requires visionOS 1 or later.</p>
+                        <dl>
+                            <div>
+                                <dt>Category</dt>
+                                <dd>Casual</dd>
+                            </div>
+                            <div>
+                                <dt>Price</dt>
+                                <dd>Free</dd>
+                            </div>
+                            <div>
+                                <dt>Size</dt>
+                                <dd>104.2 MB</dd>
+                            </div>
+                            <div>
+                                <dt>Language</dt>
+                                <dd>English</dd>
+                            </div>
+                            <div>
+                                <dt>Age</dt>
+                                <dd>4+</dd>
+                            </div>
+                            <div>
+                                <dt>System</dt>
+                                <dd>iOS 15+</dd>
+                            </div>
+                        </dl>
+                    </article>
+                </div>
+            </section>
+
+            <section class="close-bid">
+                <p><strong>Questions stay with the product listing.</strong> Support for Silent Bid, including privacy, is handled through the options on its App Store page.</p>
+                <a class="btn btn-gold" href="https://apps.apple.com/us/app/silentbid/id6817257547?uo=4" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Silent Bid. A casual estate-auction game for iPhone and iPad.</p>
+            <p><a href="privacy.html">Privacy</a> · <a href="https://apps.apple.com/us/app/silentbid/id6817257547?uo=4" target="_blank" rel="noopener noreferrer">App Store</a></p>
+        </footer>
+    </div>
+</body>
+</html>

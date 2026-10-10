@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1c120c">
+    <title>Privacy Notice — Silent Bid</title>
+    <meta name="description" content="Privacy notice for Silent Bid. The App Store label lists usage data used to track you, and usage data plus advertising data linked to you for third-party advertising.">
+    <style>
+        :root {
+            --wood: #1c120c;
+            --ivory: #f6efe3;
+            --ivory-2: #efe2cf;
+            --ink: #1a120c;
+            --gold: #c6a15b;
+            --gold-soft: #e8d7b0;
+            --wine: #8f3040;
+            --parchment: #d9cbb8;
+            --line: rgba(198, 161, 91, 0.45);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            color: var(--ivory);
+            background: var(--wood);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse 55% 40% at 50% -10%, rgba(198, 161, 91, 0.16), transparent 60%);
+        }
+
+        a:focus-visible, .btn:focus-visible {
+            outline: 2px solid var(--gold-soft);
+            outline-offset: 3px;
+        }
+
+        .wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 28px 22px 72px;
+        }
+
+        .mast {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .seal { width: 52px; height: 52px; flex: none; }
+
+        .brand strong {
+            display: block;
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 3px;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .mast nav {
+            display: flex;
+            gap: 22px;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .mast nav a { color: var(--parchment); text-decoration: none; }
+        .mast nav a:hover, .mast nav a[aria-current="page"] { color: var(--gold-soft); }
+
+        .folio {
+            background: var(--ivory);
+            color: var(--ink);
+            padding: 36px 32px 28px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+        }
+
+        .folio-kicker {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--wine);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: clamp(2.1rem, 5vw, 3.1rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.02;
+            margin-bottom: 12px;
+        }
+
+        .deck {
+            font-size: 1.08rem;
+            line-height: 1.6;
+            color: #3f3126;
+            margin-bottom: 18px;
+        }
+
+        .rule {
+            border: 0;
+            border-top: 1px solid rgba(143, 48, 64, 0.45);
+            margin: 0 0 18px;
+        }
+
+        .facts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .facts div {
+            background: var(--ivory-2);
+            padding: 12px 14px;
+        }
+
+        .facts dt {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--wine);
+            margin-bottom: 4px;
+        }
+
+        .facts dd { font-size: 0.98rem; line-height: 1.4; }
+
+        .dated {
+            margin-top: 14px;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #6d5a48;
+        }
+
+        .clause {
+            margin-top: 14px;
+            background: rgba(42, 26, 18, 0.72);
+            border: 1px solid var(--line);
+            padding: 22px 22px 20px;
+        }
+
+        .clause .num {
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .clause h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin: 6px 0 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .clause p, .clause li {
+            color: var(--parchment);
+            line-height: 1.68;
+            font-size: 1.02rem;
+        }
+
+        .clause p + p { margin-top: 10px; }
+
+        .clause ul {
+            margin: 10px 0 0 1.15rem;
+        }
+
+        .clause li + li { margin-top: 6px; }
+
+        .banner {
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: rgba(143, 48, 64, 0.35);
+            border-left: 3px solid var(--gold);
+            color: var(--ivory);
+            line-height: 1.55;
+        }
+
+        .signoff {
+            margin-top: 18px;
+            padding: 20px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            border: 1px solid var(--line);
+        }
+
+        .signoff p {
+            max-width: 34rem;
+            color: var(--parchment);
+            line-height: 1.55;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            padding: 12px 16px;
+            background: linear-gradient(180deg, #e8d7b0, var(--gold));
+            color: var(--ink);
+            white-space: nowrap;
+        }
+
+        footer {
+            margin-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.82rem;
+            color: var(--parchment);
+        }
+
+        footer a { color: var(--gold-soft); font-weight: 700; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 700px) {
+            .folio { padding: 26px 18px 22px; }
+            .facts { grid-template-columns: 1fr; }
+            .mast { align-items: flex-start; flex-wrap: wrap; }
+            .mast nav { width: 100%; }
+            .signoff .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="mast">
+            <a class="brand" href="index.html">
+                <svg class="seal" viewBox="0 0 52 52" aria-hidden="true">
+                    <circle cx="26" cy="26" r="24" fill="#8f3040"/>
+                    <circle cx="26" cy="26" r="20" fill="none" stroke="#e8d7b0" stroke-width="1.2"/>
+                    <text x="26" y="31" text-anchor="middle" fill="#f6efe3" font-family="Georgia, serif" font-size="16" font-weight="700">SB</text>
+                </svg>
+                <span>
+                    <strong>Silent Bid</strong>
+                    <small>Private estate auction</small>
+                </span>
+            </a>
+            <nav>
+                <a href="index.html">The sale</a>
+                <a href="privacy.html" aria-current="page">Privacy</a>
+            </nav>
+        </header>
+
+        <main>
+            <header class="folio">
+                <p class="folio-kicker">Bidder notice · Advertising &amp; usage data</p>
+                <h1>Privacy notice for Silent Bid</h1>
+                <p class="deck">
+                    Silent Bid is a free casual auction: ten estate lots, a rising price, and one irreversible bid. This notice explains the data practices published for that game. It is written for players and guardians. It is not a statute and it is not legal advice.
+                </p>
+                <hr class="rule">
+                <dl class="facts">
+                    <div>
+                        <dt>Used to track you</dt>
+                        <dd>Usage Data, across apps and sites owned by other companies</dd>
+                    </div>
+                    <div>
+                        <dt>Linked to you</dt>
+                        <dd>Usage Data and Advertising Data, for third-party advertising</dd>
+                    </div>
+                    <div>
+                        <dt>Price of the game</dt>
+                        <dd>Free on the App Store, and marked Contains Advertising</dd>
+                    </div>
+                    <div>
+                        <dt>Age rating</dt>
+                        <dd>4+. Practices may vary with age and with features you use</dd>
+                    </div>
+                </dl>
+                <p class="dated">Catalogue date · 10 October 2026</p>
+            </header>
+
+            <section class="clause" id="scope">
+                <p class="num">Article I</p>
+                <h2>What this notice covers</h2>
+                <p>
+                    This notice applies to the Silent Bid app distributed on the App Store and to the two English pages published with it: the game introduction and this notice. It does not describe a personal site, a newsletter, or any service other than the auction game.
+                </p>
+                <p>
+                    Your Apple ID, payments, Family Sharing, Screen Time, and device backups are Apple’s. Those are governed by Apple’s terms and privacy policy, not by this page.
+                </p>
+            </section>
+
+            <section class="clause" id="ads">
+                <p class="num">Article II</p>
+                <h2>Advertising pays for the free sale</h2>
+                <p>
+                    The App Store listing marks Silent Bid as free and states that it contains advertising. Ads may appear around play. They are third-party advertising, separate from the clues, the price, and the bid you place on a lot.
+                </p>
+                <p>
+                    Authorized sellers for that advertising are declared in the <a href="app-ads.txt">app-ads.txt</a> file published beside these pages. That file is a seller list. It is not a description of every creative you might see, and it can change when selling relationships change.
+                </p>
+                <p class="banner">
+                    The public privacy label—not this summary—is the controlling description of categories the publisher has disclosed to Apple. If the live label and this page ever diverge, rely on the label and expect this page to be replaced.
+                </p>
+            </section>
+
+            <section class="clause" id="track">
+                <p class="num">Article III</p>
+                <h2>Usage data that may track you</h2>
+                <p>
+                    Apple’s privacy section for Silent Bid says Usage Data may be used to track you across apps and websites owned by other companies. Tracking, in that label, means data linked with third-party data for advertising or shared with a data broker.
+                </p>
+                <p>
+                    In this game, that disclosure sits next to third-party ads. It is not a claim that your bids are published on a public leaderboard. The label names Usage Data as the tracking category. This notice does not add health, contacts, location, or financial information to that list.
+                </p>
+            </section>
+
+            <section class="clause" id="linked">
+                <p class="num">Article IV</p>
+                <h2>Data linked to you for ads</h2>
+                <p>
+                    The same label says the following may be collected and linked to your identity, for third-party advertising:
+                </p>
+                <ul>
+                    <li>Usage Data — product interaction of the kind Apple groups under that heading.</li>
+                    <li>Advertising Data — information about ads served or advertising interactions, as Apple defines that category.</li>
+                </ul>
+                <p>
+                    Linking means the publisher indicated the data can be tied to an identity, which can include an advertising identifier or similar device-level ID. Advertising partners use those categories to choose, deliver, limit, and measure ads. The publisher does not operate a separate account system for Silent Bid on the store listing, so this notice does not describe a house login, a saved payment card, or a publisher-run profile page.
+                </p>
+            </section>
+
+            <section class="clause" id="play">
+                <p class="num">Article V</p>
+                <h2>Bids, stars, and the device</h2>
+                <p>
+                    Play is local in spirit: you read clues, watch one price climb, and submit one bid. Progress that lets the ten lots continue—lots you have opened, and stars earned when a bid lands inside the displayed range—is kept so the sale can resume on that device.
+                </p>
+                <p>
+                    The App Store label does not file that progress under a collected category. The categories it does file are Usage Data and Advertising Data, as set out above. Removing the app deletes its local storage. If you use iCloud Backup or a similar Apple feature, Apple may include app data under your own backup settings. Silent Bid does not describe a separate publisher cloud account for auction results.
+                </p>
+            </section>
+
+            <section class="clause" id="not-asked">
+                <p class="num">Article VI</p>
+                <h2>What a bid does not ask you to type</h2>
+                <p>
+                    The store listing does not require an email address, phone number, legal name, contacts, photo library, camera, microphone, or precise location before you can bid. These web pages add none of those fields: there is no comment form, mailing list, or checkout.
+                </p>
+                <p>
+                    If a future version raises a system permission, the dialog on the device names the access. Read that prompt before you allow it. A permission the game does not request is not granted by installing from the store.
+                </p>
+            </section>
+
+            <section class="clause" id="apple">
+                <p class="num">Article VII</p>
+                <h2>The platform around the auction</h2>
+                <p>
+                    Silent Bid is installed from the App Store. Language on the listing is English. The age rating is 4+. The download is about 104.2 MB and needs iOS 15 or later (iPadOS 15 or later on iPad). It is designed for iPad. iPhone, iPod touch, Mac with Apple silicon on macOS 12 or later, and Apple Vision on visionOS 1 or later are also named; the Mac line is marked not verified for macOS.
+                </p>
+                <p>
+                    Download, update, and refund flows belong to Apple. Information Apple already holds about an Apple ID is not copied into a separate publisher dossier merely because the game is installed.
+                </p>
+            </section>
+
+            <section class="clause" id="choices">
+                <p class="num">Article VIII</p>
+                <h2>Choices about tracking and ads</h2>
+                <p>
+                    When iOS shows an App Tracking Transparency prompt, your choice controls whether the app may track you across other companies’ apps and websites. You can revisit tracking permission in Settings, under Privacy &amp; Security, then Tracking. Limit Ad Tracking and personalized-ad controls elsewhere in system settings can further shape advertising on the device.
+                </p>
+                <p>
+                    Those switches are Apple’s. They do not erase ads from a game whose listing says it contains advertising. They change how tracking and ad personalization are allowed to work, within what the operating system permits.
+                </p>
+            </section>
+
+            <section class="clause" id="children">
+                <p class="num">Article IX</p>
+                <h2>Younger bidders</h2>
+                <p>
+                    The age rating is 4+. A parent or guardian decides whether the app is installed. Ask to Buy, Screen Time, and Family Sharing can block or gate that download.
+                </p>
+                <p>
+                    The listing still discloses advertising, usage data used to track, and usage plus advertising data linked for third-party advertising. Apple notes that privacy practices may vary, including with age. This notice does not claim a separate child account inside the game. If you believe a child sent personal information to the publisher outside ordinary play, use the support path on the App Store listing and include only what is needed to identify the request.
+                </p>
+            </section>
+
+            <section class="clause" id="rights">
+                <p class="num">Article X</p>
+                <h2>Requests, retention, and regions</h2>
+                <p>
+                    Depending on where you live, you may have rights to access, correct, delete, or receive a copy of personal information, or to object to or limit certain advertising uses, including a sale or share of personal information for cross-context advertising. Send that request through the support options on the App Store product page for Silent Bid. Name the game, say the message is about privacy, and leave out unrelated personal details.
+                </p>
+                <p>
+                    Some advertising data is held by the third parties that serve ads, not in a file cabinet the publisher can empty alone. Device settings in Article VIII are the practical control for tracking permission. There is no personal email address or street address on this site for privacy mail.
+                </p>
+                <p>
+                    Usage and advertising data are kept only as long as needed for the advertising purposes described on the label, for measurement, and for legal obligations that apply to the publisher or to an advertising partner. On-device stars and lot progress remain until you delete the app or clear its storage, aside from Apple backups you control.
+                </p>
+                <p>
+                    Advertising partners may process data in countries other than yours. Where a transfer rule requires a safeguard, that safeguard is the one the relevant partner and platform provide for ad delivery. This page does not name a private international office.
+                </p>
+            </section>
+
+            <section class="clause" id="changes">
+                <p class="num">Article XI</p>
+                <h2>When the notice changes</h2>
+                <p>
+                    The catalogue date on the ivory sheet is the date of this wording. If a later build changes what is collected—for example new linked categories, or a change in whether data is used to track—the App Store privacy label should move with it, and this page will be rewritten so the two agree.
+                </p>
+                <p>
+                    Playing after an updated notice is posted means the new text was available here and, when Apple shows it, through the privacy policy link on the store listing.
+                </p>
+            </section>
+
+            <div class="signoff">
+                <p>The live listing, the privacy label, and product support for Silent Bid are on the App Store page.</p>
+                <a class="btn" href="https://apps.apple.com/us/app/silentbid/id6817257547?uo=4" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2026 Silent Bid. Privacy notice for the estate-auction game.</p>
+            <p><a href="index.html">The sale</a> · <a href="https://apps.apple.com/us/app/silentbid/id6817257547?uo=4" target="_blank" rel="noopener noreferrer">App Store</a></p>
+        </footer>
+    </div>
+</body>
+</html>
